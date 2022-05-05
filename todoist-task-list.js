@@ -34,6 +34,11 @@ class TodoistTaskList extends HTMLElement {
           margin-bottom: 10px;
           color: var(--text-color);
           font: "var(--primary-font-family)";
+          font-size: 1.2em;
+          border-left: 2px solid var(--accent-color);
+          margin-bottom: 0.75em;
+          padding: 0.25em 0.75em;
+        }
       </style>
     `;
 
