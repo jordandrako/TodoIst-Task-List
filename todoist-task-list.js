@@ -14,7 +14,7 @@ class TodoistTaskList extends HTMLElement {
     const state = hass.states[entityId].state;
 
     if (state == 'off') {
-      this.content.innerHTML = '<i>none</i>';
+      this.content.innerHTML = '<strong>All clear</strong>';
     }
     else{
       const tasksList = hass.states[entityId].attributes.all_tasks;
