@@ -17,21 +17,20 @@ class TodoistTaskList extends HTMLElement {
       .map((t) => t.replace(/\s?p1\s?/g, ""))
       .sort();
     const normal = allTasks.filter((t) => t.indexOf("p1") < 0).sort();
-    const tasksList = [...priority, ...normal];
 
-    if (tasksList.length == 0) {
+    if (allTasks.length == 0) {
       this.content.innerHTML = '<strong>All clear</strong>';
     }
     else {
-      this.updateHtml(tasksList);
+      this.updateHtml(priority, normal);
     }
   }
 
-  formatTask(task) {
-    return this.content.innerHTML += `<div class=task>${task}</div>`;
+  formatTask(task, priority) {
+    return this.content.innerHTML += `<div class="task${priority ? " priority": "">${task}</div>`;
   }
 
-  updateHtml(tasksList) {
+  updateHtml(priority, normal) {
     this.content.innerHTML = `
       <style>
         .task {
@@ -39,15 +38,22 @@ class TodoistTaskList extends HTMLElement {
           color: var(--text-color);
           font: "var(--primary-font-family)";
           font-size: 1em;
-          border-left: 2px solid var(--accent-color);
+          border-left: 2px solid var(--primary-color);
           margin-bottom: 0.5em;
           padding: 0.25em 1em;
+        }
+        .priority {
+          border-left-color: var(--accent-color);
+          font-weight: bold;
         }
       </style>
     `;
 
-    tasksList.forEach((task) => {
-      this.content.innerHTML = this.formatTask(task);
+    priority.forEach((task) => {
+      this.content.innerHTML = this.formatTask(task, true);
+    });
+    normal.forEach((task) => {
+      this.content.innerHTML = this.formatTask(task, true);
     });
   }
 
