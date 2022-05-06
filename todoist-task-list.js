@@ -12,7 +12,10 @@ class TodoistTaskList extends HTMLElement {
 
     const entityId = this.config.entity;
     const allTasks = hass.states[entityId].attributes.all_tasks || [];
-    const priority = allTasks.filter((t) => t.indexOf("p1") >= 0).sort();
+    const priority = allTasks
+      .filter((t) => t.indexOf("p1") >= 0)
+      .map((t) => t.replace(/\s?p1\s?/g, "")
+      .sort();
     const normal = allTasks.filter((t) => t.indexOf("p1") < 0).sort();
     const tasksList = [...priority, ...normal];
 
