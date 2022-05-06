@@ -14,7 +14,7 @@ class TodoistTaskList extends HTMLElement {
     const allTasks = hass.states[entityId].attributes.all_tasks || [];
     const priority = allTasks.filter((t) => t.indexOf("p1") >= 0).sort();
     const normal = allTasks.filter((t) => t.indexOf("p1") < 0).sort();
-    const taskList = [...priority, ...normal];
+    const tasksList = [...priority, ...normal];
 
     if (tasksList.length == 0) {
       this.content.innerHTML = '<strong>All clear</strong>';
