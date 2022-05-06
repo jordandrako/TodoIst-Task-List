@@ -11,14 +11,12 @@ class TodoistTaskList extends HTMLElement {
     }
 
     const entityId = this.config.entity;
-    const state = hass.states[entityId].state;
+    const tasksList = hass.states[entityId].attributes.all_tasks || [];
 
-    if (state == 'off') {
+    if (tasksList.length == 0) {
       this.content.innerHTML = '<strong>All clear</strong>';
     }
-    else{
-      const tasksList = hass.states[entityId].attributes.all_tasks;
-
+    else {
       this.updateHtml(tasksList);
     }
   }
