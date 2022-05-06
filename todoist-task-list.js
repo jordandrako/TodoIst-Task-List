@@ -27,14 +27,13 @@ class TodoistTaskList extends HTMLElement {
   }
 
   formatTask(task, priority) {
-    return this.content.innerHTML += `<div class="task${priority ? " priority": "">${task}</div>`;
+    return this.content.innerHTML += `<div class="task${priority ? " priority": ""}>${task}</div>`;
   }
 
   updateHtml(priority, normal) {
     this.content.innerHTML = `
       <style>
         .task {
-          margin-bottom: 10px;
           color: var(--text-color);
           font: "var(--primary-font-family)";
           font-size: 1em;
