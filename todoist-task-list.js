@@ -1,10 +1,10 @@
 class TodoistTaskList extends HTMLElement {
   set hass(hass) {
     if (!this.content) {
-      const card = document.createElement('ha-card');
+      const card = document.createElement("ha-card");
       card.header = this.config.title;
-      this.content = document.createElement('div');
-      this.content.style.padding = '16px 16px 16px';
+      this.content = document.createElement("div");
+      this.content.style.padding = "16px 16px 16px";
 
       card.appendChild(this.content);
       this.appendChild(card);
@@ -19,21 +19,22 @@ class TodoistTaskList extends HTMLElement {
     const normal = allTasks.filter((t) => t.indexOf("p1") < 0).sort();
 
     if (allTasks.length == 0) {
-      this.content.innerHTML = '<strong>All clear</strong>';
-    }
-    else {
+      this.content.innerHTML = "<strong>All clear</strong>";
+    } else {
       this.updateHtml(priority, normal);
     }
   }
 
   formatTask(task, priority) {
-    return this.content.innerHTML += `<div class="task${priority ? " priority": ""}>${task}</div>`;
+    const className = priority ? "priority-task" : "task";
+    return (this.content.innerHTML += `<div class="${className}">${task}</div>`);
   }
 
   updateHtml(priority, normal) {
     this.content.innerHTML = `
       <style>
-        .task {
+        .task,
+        .priority-task {
           color: var(--text-color);
           font: "var(--primary-font-family)";
           font-size: 1em;
@@ -41,7 +42,7 @@ class TodoistTaskList extends HTMLElement {
           margin-bottom: 0.5em;
           padding: 0.25em 1em;
         }
-        .priority {
+        .priority-task {
           border-left-color: var(--accent-color);
           font-weight: bold;
         }
@@ -58,12 +59,10 @@ class TodoistTaskList extends HTMLElement {
 
   setConfig(config) {
     if (!config.entity) {
-      throw new Error('You need to define an entity');
+      throw new Error("You need to define an entity");
     }
     this.config = config;
-
   }
-
 }
 
-customElements.define('todoist-task-list', TodoistTaskList);
+customElements.define("todoist-task-list", TodoistTaskList);
