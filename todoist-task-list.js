@@ -53,7 +53,7 @@ class TodoistTaskList extends HTMLElement {
       this.content.innerHTML = this.formatTask(task, true);
     });
     normal.forEach((task) => {
-      this.content.innerHTML = this.formatTask(task, true);
+      this.content.innerHTML = this.formatTask(task);
     });
   }
 
